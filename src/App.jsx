@@ -61,7 +61,7 @@ function App() {
       <button onClick={handleClick}>Increase App</button>
       {/* use to test memo React, in this case we change the name, it will render again, if not, Parent not render */}
       <button onClick={changeName}>Change name App</button>
-      {/* change useMemo values */}
+      {/* change useMemo values, will change values in state then memorised value is calculated again */}
       <button onClick={changeAge}>Change age App</button>
     </div>
   );

@@ -1,4 +1,3 @@
-import "./App.css";
 import Parent from "./Parent";
 import React, { useCallback, useMemo } from "react";
 

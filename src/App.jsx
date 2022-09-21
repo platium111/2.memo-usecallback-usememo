@@ -3,11 +3,12 @@ import React, { useCallback, useMemo } from "react";
 
 function App() {
   console.log("----------");
-  console.log("App loading");
   const [appState, setAppState] = React.useState({
     count: 0,
     name: "clark",
   });
+  console.log("App loading", appState);
+
   const [ages, setAges] = React.useState([12, 22, 5, 44, 55, 66, 77]);
 
   const handleClick = () => {
@@ -22,22 +23,22 @@ function App() {
   };
 
   const changeAge = () => {
-    setAges([11, 22]);
+    setAges((ages) => [...ages, ages[ages.length - 1] + 1]);
   };
 
-  // [learn] we use hook fn or normal fn inside useCallback, we need to declare it inside useCallback, otherwise just disable warning in dependencies
-  // Don't use `appState` inside dependencies because function never changes
-  const increaseCount = useCallback(() => {
-    setAppState({ ...appState, count: appState.count + 1 });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const sumAge = () => {
-    console.log("Run sum age");
+    console.log("Run sum age", ages);
     return ages.reduce((acc, current) => {
       return (acc += current);
     }, 0);
   };
+
+  // [learn] we use hook fn or normal fn inside useCallback, we need to declare it inside useCallback, otherwise just disable warning in dependencies
+  // Don't use `appState` inside dependencies because function never changest
+  const increaseCount = useCallback(() => {
+    console.log("increaseCount useCallback");
+    setAppState({ ...appState, count: appState.count + 1 });
+  }, []);
 
   // [learn] useMemo will return the value, used to memorise the function with heavy calculation
   // it will based on values in dependencies to know when it should render
